@@ -3,7 +3,7 @@
 namespace IN10\Multilanguage;
 
 use Closure;
-use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\App;
 
 class SetLanguageFromRoute
 {
@@ -43,7 +43,7 @@ class SetLanguageFromRoute
             return redirect($newPath, 301);
         }
 
-        Config::set('app.locale', $language);
+        App::setLocale($language);
         return $next($request);
     }
 }
