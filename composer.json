@@ -1,5 +1,6 @@
 {
     "name": "in10/laravel-multilanguage",
+    "description": "Simple, opinionated multilanguage package for Laravel",
     "type": "library",
     "require": {
         "laravel/framework": "^5.7"
