@@ -2,7 +2,7 @@
 > Simple, opinionated multilanguage package for Laravel
 
 ## Requirements
-* PHP 7.3
+* PHP 7.1 - 7.3
 * Laravel 5.7
 
 ## Installation

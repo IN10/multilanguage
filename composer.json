@@ -3,7 +3,7 @@
     "description": "Simple, opinionated multilanguage package for Laravel",
     "type": "library",
     "require": {
-        "php": "^7.3",
+        "php": "^7.1 || ^7.2 || ^7.3",
         "laravel/framework": "^5.7"
     },
     "license": "MIT",
