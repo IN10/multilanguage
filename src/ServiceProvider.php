@@ -1,11 +1,26 @@
 <?php
 
-namespace IN10\LaravelMultilanguage;
+namespace IN10\Multilanguage;
 
-class ServiceProvider
+use IN10\Multilanguage\Router;
+use IN10\Multilanguage\SetLanguageFromRoute;
+use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
+
+class ServiceProvider extends IlluminateServiceProvider
 {
+    public function boot() : void
+    {
+        $this->mergeConfigFrom(__DIR__ . '/../config/languages.php', 'languages');
+
+        $this->publishes([
+            __DIR__ . '/../config/languages.php' => config_path('languages.php'),
+        ], 'config');
+    }
+
     public function register() : void
     {
-        app(Router::class)->mixin(\IN10\Multilanguage\Router::class);
+        $router = app('router');
+        $router->aliasMiddleware('set-language-from-route', SetLanguageFromRoute::class);
+        $router->mixin(new Router());
     }
 }

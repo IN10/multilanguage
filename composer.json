@@ -3,6 +3,7 @@
     "description": "Simple, opinionated multilanguage package for Laravel",
     "type": "library",
     "require": {
+        "php": "^7.3",
         "laravel/framework": "^5.7"
     },
     "license": "MIT",
@@ -15,6 +16,16 @@
     "autoload": {
         "psr-4": {
             "IN10\\Multilanguage\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "IN10\\Multilanguage\\ServiceProvider"
+            ]
         }
     }
 }

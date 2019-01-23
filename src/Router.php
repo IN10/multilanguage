@@ -16,6 +16,7 @@ class Router
                 $attributes = array_merge($attributes, [
                     'prefix' => $language,
                     'as' => $language . '.',
+                    'middleware' => 'set-language-from-route',
                 ]);
                 $this->group($attributes, $callback);
             }
