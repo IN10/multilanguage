@@ -12,4 +12,9 @@
             "email": "jakob@jakobbuis.nl"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "IN10\\Multilanguage\\": "src/"
+        }
+    }
 }
