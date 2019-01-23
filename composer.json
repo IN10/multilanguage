@@ -1,5 +1,5 @@
 {
-    "name": "in10/laravel-multilanguage",
+    "name": "in10/multilanguage",
     "description": "Simple, opinionated multilanguage package for Laravel",
     "type": "library",
     "require": {
