@@ -14,18 +14,21 @@ class SetLanguageFromRoute
         // The root path "/" is a special case in Laravel, e.g. the root route
         // is "/", while "/de/arthur" would be "de/arthur" as the path
         if ($path === '/') {
+            App::setLocale(config('languages.default'));
             return $next($request);
         }
 
         // Find the language
         $parts = collect(explode('/', $path));
         if ($parts->count() === 0) {
+            App::setLocale(config('languages.default'));
             return $next($request);
         }
 
         // Check if the language is 2 letters
         $language = $parts->first();
         if (strlen($language) !== 2) {
+            App::setLocale(config('languages.default'));
             return $next($request);
         }
 
