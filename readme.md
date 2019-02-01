@@ -43,3 +43,9 @@ This helpers takes the same parameters as the Laravel `route()` helper, with an 
 translatedRoute('news.show', ['slug' => 'five-ways-to-translate-content');
 ```
 which will generate `/nl/news/five-ways-to-translate-content` in this example if the current language is set to Dutch.
+
+## Developer
+[Jakob Buis](https://www.jakobbuis.nl)
+
+## License
+Copyright 2019 [IN10](https://www.in10.nl). All rights reserved.
