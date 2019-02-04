@@ -5,6 +5,7 @@
 - [Requirements](#requirements)
 - [Design](#design)
 - [Installation](#installation)
+- [Migrating from Arcanedev/localization](#migrating-from-arcanedevlocalization)
 - [Usage](#usage)
 - [Developer](#developer)
 - [License](#license)
@@ -31,6 +32,14 @@ and publish the configuration file:
 php artisan vendor:publish --provider=IN10\\Multilanguage\\ServiceProvider
 ```
 You can customize this file as needed.
+
+## Migrating from ARCANEDEV/localization
+One of the packages we used to use at IN10 is [ARCANEDEV/Localization](https://github.com/arcanedev/localization). To facilitate an easy upgrade from the package to this new, smaller package, execute the following steps:
+
+1. Remove the existing package: `composer remove arcanedev/localization`.
+1. Remove the ServiceProvider and configuration file if needed.
+1. Find every instance of `localization()->getCurrentLocale()` and replace it with a call to `App::getLocale()`.
+1. Follow the steps in the [Installation](#installation) section above to install IN10/multilanguage.
 
 ## Usage
 You can make a set of routes translated by wrapping them in a group:
