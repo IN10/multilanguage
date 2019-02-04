@@ -1,9 +1,26 @@
 # IN10 Multilanguage
 > Simple, opinionated multilanguage package for Laravel
 
+## Contents
+- [Requirements](#requirements)
+- [Design](#design)
+- [Installation](#installation)
+- [Migrating from Arcanedev/localization](#migrating-from-arcanedevlocalization)
+- [Usage](#usage)
+- [Developer](#developer)
+- [License](#license)
+
 ## Requirements
 * PHP 7.1 - 7.3
 * Laravel 5.7
+
+## Design
+This is an opinionated package: it works in a specific way, based on the setups we run at IN10. That means:
+
+1. All translated routes start with a route part, e.g. example.com/de/news/
+1. A website has a pre-defined set of languages, all other languages return a 404.
+1. A language is always two characters.
+1. The website has a single default language, by default "en" which you can change in the configuration. This default language is excluded from the URL via a 301-redirect. If you visit example.com/en/test, it will be redirected to example.com/test.
 
 ## Installation
 Install the package using composer:
@@ -16,13 +33,13 @@ php artisan vendor:publish --provider=IN10\\Multilanguage\\ServiceProvider
 ```
 You can customize this file as needed.
 
-## Design
-This is an opinionated package: it works in a specific way, based on the setups we run at IN10. That means:
+## Migrating from ARCANEDEV/localization
+One of the packages we used to use at IN10 is [ARCANEDEV/Localization](https://github.com/arcanedev/localization). To facilitate an easy upgrade from the package to this new, smaller package, execute the following steps:
 
-1. All translated routes start with a route part, e.g. example.com/de/news/
-1. A website has a pre-defined set of languages, all other languages return a 404.
-1. A language is always two characters.
-1. The website has a single default language, by default "en" which you can change in the configuration. This default language is excluded from the URL via a 301-redirect. If you visit example.com/en/test, it will be redirected to example.com/test.
+1. Remove the existing package: `composer remove arcanedev/localization`.
+1. Remove the ServiceProvider and configuration file if needed.
+1. Find every instance of `localization()->getCurrentLocale()` and replace it with a call to `App::getLocale()`.
+1. Follow the steps in the [Installation](#installation) section above to install IN10/multilanguage.
 
 ## Usage
 You can make a set of routes translated by wrapping them in a group:
