@@ -1,6 +1,14 @@
 # IN10 Multilanguage
 > Simple, opinionated multilanguage package for Laravel
 
+## Contents
+- [Requirements](#requirements)
+- [Design](#design)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Developer](#developer)
+- [License](#license)
+
 ## Requirements
 * PHP 7.1 - 7.3
 * Laravel 5.7
