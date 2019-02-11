@@ -38,7 +38,7 @@ One of the packages we used to use at IN10 is [ARCANEDEV/Localization](https://g
 
 1. Remove the existing package: `composer remove arcanedev/localization`.
 1. Remove the ServiceProvider and configuration file if needed.
-1. Find every instance of `localization()->getCurrentLocale()` and replace it with a call to `App::getLocale()`.
+1. Find every instance of `localization()->getCurrentLocale()` and replace it with a call to `App::getLocale()`. A secondary format used is `Localization::getCurrentLocale()`, so you might want to check for that as well.
 1. Follow the steps in the [Installation](#installation) section above to install IN10/multilanguage.
 
 ## Usage
