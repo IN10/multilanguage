@@ -6,6 +6,10 @@ use Closure;
 
 class Router
 {
+    /**
+     * Define a multilanguage route group in which all contained routes are
+     * prefixed with the correct language
+     */
     public function multilanguage()
     {
         return function (array $attributes, Closure $callback) {
