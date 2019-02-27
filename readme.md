@@ -42,6 +42,8 @@ One of the packages we used to use at IN10 is [ARCANEDEV/Localization](https://g
 1. Follow the steps in the [Installation](#installation) section above to install IN10/multilanguage.
 
 ## Usage
+
+### Setting up groups
 You can make a set of routes translated by wrapping them in a group:
 ```php
 Route::multilanguage([], function() {
@@ -51,6 +53,30 @@ Route::multilanguage([], function() {
 ```
 The first parameter `attributes` takes the same settings as a regular route group, except for `prefix`, `as` and `middleware`, which are overwritten (these parameters are required to make the translation work). The multilanguage-group should be a root-level construct, adding it inside of another group or prefix is not tested, and would probably not work.
 
+### Route translation
+In some cases, you might want to translate slugs in the URL. A common example is the `/en/news/an-article` and `/nl/nieuws/een-artikel` variants of URLs. This can be accomplished using the `transGet` routing function:
+
+```php
+Route::multilanguage([], function() {
+    Route::transGet('news.show');
+});
+```
+Note that using a `transGet` call outside of a multilanguage routing group, will not work.
+
+The translation key is automatically looked up in the `routes.php` translation file. All translation routes must always be translated, but the package will scream at you if you're missing translations.
+```php
+// en
+return [
+    'news.show' => 'news/{slug}',
+];
+
+// nl
+return [
+    'news.show' => 'nieuws/{slug}',
+];
+```
+
+### Route generation
 If you want to generate a route with a correct language, use the included helper:
 ```php
 function translatedRoute(string $route, array $parameters = [], bool $absolute = true, ?string $language = null) : string
