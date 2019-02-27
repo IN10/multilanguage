@@ -3,6 +3,9 @@
 namespace IN10\Multilanguage;
 
 use Closure;
+use DomainException;
+use Illuminate\Translation\Translator;
+use OutOfRangeException;
 
 class Router
 {
@@ -30,6 +33,42 @@ class Router
             $this->group(array_merge($attributes, [
                 'middleware' => 'set-language-from-route',
             ]), $callback);
+        };
+    }
+
+    /**
+     * Register a new translated GET route with the router.
+     */
+    public function transGet() : Closure
+    {
+        return function ($key, $action) {
+
+            // Grab the current language from the group stack
+            $lastMiddleware = end($this->groupStack);
+            $language = substr($lastMiddleware['as'] ?? '', 0, 2);
+
+            // If language is not set (like in the default group), use the default language
+            if (!$language) {
+                $language = config('languages.default');
+            }
+
+            // Check if the language is valid
+            if (!in_array($language, config('languages.supported-languages', []))) {
+                dd($language, config('languages.supported-languages'), $this->groupStack);
+                throw new DomainException('Route::transGet() can only be used in a ::multilanguage() route group, which must be a root-group (first part of the path)');
+            }
+
+            $translator = app(Translator::class);
+
+            // Check if we have a translation
+            $translationKey = 'routes.' . $key;
+            if (!$translator->hasForLocale($translationKey, $language)) {
+                throw new OutOfRangeException("Missing translation for \"{$translationKey}\" in language {$language}");
+            }
+
+            // Create a GET-route with the translated string
+            $actualRoute = $translator->trans($translationKey);
+            return $this->get($actualRoute, $action);
         };
     }
 }
