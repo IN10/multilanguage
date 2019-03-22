@@ -66,7 +66,7 @@ class Router
             }
 
             // Create a GET-route with the translated string
-            $actualRoute = $translator->trans($translationKey);
+            $actualRoute = $translator->trans($translationKey, [], $language);
             return $this->get($actualRoute, $action);
         };
     }
