@@ -54,7 +54,6 @@ class Router
 
             // Check if the language is valid
             if (!in_array($language, config('languages.supported-languages', []))) {
-                dd($language, config('languages.supported-languages'), $this->groupStack);
                 throw new DomainException('Route::transGet() can only be used in a ::multilanguage() route group, which must be a root-group (first part of the path)');
             }
 
