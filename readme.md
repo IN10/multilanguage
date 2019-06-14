@@ -37,9 +37,17 @@ You can customize this file as needed.
 One of the packages we used to use at IN10 is [ARCANEDEV/Localization](https://github.com/arcanedev/localization). To facilitate an easy upgrade from the package to this new, smaller package, execute the following steps:
 
 1. Remove the existing package: `composer remove arcanedev/localization`.
-1. Remove the ServiceProvider and configuration file if needed.
-1. Find every instance of `localization()->getCurrentLocale()` and replace it with a call to `App::getLocale()`. A secondary format used is `Localization::getCurrentLocale()`, so you might want to check for that as well.
-1. Follow the steps in the [Installation](#installation) section above to install IN10/multilanguage.
+2. Remove the ServiceProvider and configuration file if needed.
+3. Follow the steps in the [Installation](#installation) section above to install IN10/multilanguage.
+4. Search through your project for the following instances of Localization-specific code that must be replaced
+
+| Search for | Replace with | Remarks |
+| ---------- | ------------ | ------- |
+| `localization()->getCurrentLocale()` | `App::getLocale()` | Don't forget to import the Facade |
+| `Localization::getCurrentLocale()` | `App::getLocale()` | Don't forget to import the Facade |
+| `config('localization.supported-locales')` | `config('languages.supported-languages` | |
+
+5. Test your project thoroughly to check if all translated routes and features still work.
 
 ## Usage
 
