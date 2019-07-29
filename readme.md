@@ -20,6 +20,7 @@ This is an opinionated package: it works in a specific way, based on the setups 
 1. All translated routes start with a route part, e.g. example.com/de/news/
 1. A website has a pre-defined set of languages, all other languages return a 404.
 1. A language is always two characters.
+1. The homepage is translated.
 1. The website has a single default language, by default "en" which you can change in the configuration. This default language is excluded from the URL via a 301-redirect. If you visit example.com/en/test, it will be redirected to example.com/test.
 
 ## Installation
