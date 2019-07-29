@@ -24,14 +24,14 @@ class Router
                 $this->group(array_merge($attributes, [
                     'prefix' => $language,
                     'as' => $language . '.',
-                    'middleware' => 'set-language-from-route',
+                    'middleware' => ['set-language-from-route'],
                 ]), $callback);
             }
 
             // Define the route group again, but without an language, which
             // defaults to the default language
             $this->group(array_merge($attributes, [
-                'middleware' => 'set-language-from-route',
+                'middleware' => ['set-language-from-route', 'detect-user-language'],
             ]), $callback);
         };
     }

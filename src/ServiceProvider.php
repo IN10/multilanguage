@@ -21,6 +21,7 @@ class ServiceProvider extends IlluminateServiceProvider
     {
         $router = app('router');
         $router->aliasMiddleware('set-language-from-route', SetLanguageFromRoute::class);
+        $router->aliasMiddleware('detect-user-language', DetectLanguage::class);
         $router->mixin(new Router());
     }
 }
