@@ -60,7 +60,7 @@ Route::multilanguage([], function() {
     Route::get('/news/{slug}', 'HomepageController')->name('news.show');
 });
 ```
-The first parameter `attributes` takes the same settings as a regular route group, except for `prefix`, `as` and `middleware`, which are overwritten (these parameters are required to make the translation work). The multilanguage-group should be a root-level construct, adding it inside of another group or prefix is not tested, and would probably not work.
+The first parameter `attributes` takes the same settings as a regular route group, except for `prefix`, `as` and `middleware`, which are overwritten (these parameters are required to make the translation work). The multilanguage-group should be a root-level construct.  Adding it inside of another group or prefix is not tested and probably won't work.
 
 ### Route translation
 In some cases, you might want to translate slugs in the URL. A common example is the `/en/news/an-article` and `/nl/nieuws/een-artikel` variants of URLs. This can be accomplished using the `transGet` routing function:
@@ -70,9 +70,9 @@ Route::multilanguage([], function() {
     Route::transGet('news.show');
 });
 ```
-Note that using a `transGet` call outside of a multilanguage routing group, will not work.
+Note that using `transGet` outside of a multilanguage routing group will not work.
 
-The translation key is automatically looked up in the `routes.php` translation file. All translation routes must always be translated, but the package will scream at you if you're missing translations.
+The translation key is automatically looked up in the `routes.php` translation file. All translation routes must always be translated. Don't fret: the package will scream at you if you're missing a translation.
 ```php
 // en
 return [
