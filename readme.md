@@ -90,7 +90,7 @@ If you want to generate a route with a correct language, use the included helper
 ```php
 function translatedRoute(string $route, array $parameters = [], bool $absolute = true, ?string $language = null) : string
 ```
-This helpers takes the same parameters as the Laravel `route()` helper, with an optional language as a last parameter. If you omit the language, the helper uses the current language for the request. This is usually what you want, so in general you can use the translatedRoute helper as if it where the regular helper:
+This helpers takes the same parameters as the Laravel `route()` helper, with an optional language as a last parameter. If you omit the language, the helper uses the current language for the request. This is usually what you want, so in general you can use the translatedRoute helper as if it were the regular helper:
 ```php
 translatedRoute('news.show', ['slug' => 'five-ways-to-translate-content');
 ```
