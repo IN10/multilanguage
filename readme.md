@@ -74,12 +74,12 @@ Note that using `transGet` outside of a multilanguage routing group will not wor
 
 The translation key is automatically looked up in the `routes.php` translation file. All translation routes must always be translated. Don't fret: the package will scream at you if you're missing a translation.
 ```php
-// en
+// resources/lang/en/routes.php
 return [
     'news.show' => 'news/{slug}',
 ];
 
-// nl
+// resources/lang/nl/routes.php
 return [
     'news.show' => 'nieuws/{slug}',
 ];
