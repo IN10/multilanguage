@@ -72,7 +72,11 @@ class DetectLanguage
             if (strpos($entry, ';') !== false) {
                 $parts = explode(';q=', $entry);
                 $language = $parts[0];
-                $q = (float) trim($parts[1]);
+                if (count($parts) >= 2) {
+                    $q = (float) trim($parts[1]);
+                } else {
+                    $q = 1.0;
+                }
             } else {
                 $language = $entry;
                 $q = 1.0;
