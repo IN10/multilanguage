@@ -40,10 +40,10 @@ class SetLanguageFromRoute
 
         // Redirect the default language to the naked route
         if ($language === config('languages.default')) {
-            // Chop off the language part
-            $parts->shift();
+            $parts->shift(); // Chop off the language part
             $newPath = $parts->implode('/');
-            return redirect($newPath, 301);
+            $queryString = http_build_query($request->query());
+            return redirect("{$newPath}?{$queryString}", 301);
         }
 
         App::setLocale($language);
