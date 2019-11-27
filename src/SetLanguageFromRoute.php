@@ -42,7 +42,8 @@ class SetLanguageFromRoute
         if ($language === config('languages.default')) {
             $parts->shift(); // Chop off the language part
             $newPath = $parts->implode('/');
-            if ($queryString = http_build_query($request->query())) {
+            $queryString = http_build_query($request->query());
+            if ($queryString) {
                 $newPath = "{$newPath}?{$queryString}";
             }
             return redirect($newPath, 301);
