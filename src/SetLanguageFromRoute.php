@@ -43,7 +43,10 @@ class SetLanguageFromRoute
             $parts->shift(); // Chop off the language part
             $newPath = $parts->implode('/');
             $queryString = http_build_query($request->query());
-            return redirect("{$newPath}?{$queryString}", 301);
+            if ($queryString) {
+                $newPath = "{$newPath}?{$queryString}";
+            }
+            return redirect($newPath, 301);
         }
 
         App::setLocale($language);
