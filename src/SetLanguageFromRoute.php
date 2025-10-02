@@ -4,12 +4,21 @@ namespace IN10\Multilanguage;
 
 use Closure;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 
 class SetLanguageFromRoute
 {
     public function handle($request, Closure $next)
     {
         $path = $request->path();
+
+        //set language based on browser language
+        $browserLanguage = substr(preg_split('/,|;/', $request->server('HTTP_ACCEPT_LANGUAGE'))[0], 0, 2);
+        if (!in_array($browserLanguage, config('languages.supported-languages')) && Session::get('language') === null) {
+            setcookie('language', config('languages.fallback-language'), time() + 3600 * 24 * 30, '/');
+            Session::put('language', config('languages.fallback-language'));
+            return redirect( config(['app.url']) . '/' . config('languages.fallback-language') . $path, 301);
+        }
 
         // The root path "/" is a special case in Laravel, e.g. the root route
         // is "/", while "/de/arthur" would be "de/arthur" as the path
@@ -22,7 +31,6 @@ class SetLanguageFromRoute
         $parts = collect(explode('/', $path));
         if ($parts->count() === 0) {
             App::setLocale(config('languages.default'));
-            return $next($request);
         }
 
         // Check if the language is 2 letters
